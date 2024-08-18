@@ -31,3 +31,6 @@ volumeicon &
 
 # blueman
 blueman-applet &
+
+# trayer
+#sleep 2 && trayer --edge top --align right --margin 400 --monitor 0 --widthtype request --heighttype pixel --height 30 --distancefrom top --distance 3 --iconspacing 10 &
