@@ -32,11 +32,5 @@ volumeicon &
 # blueman
 blueman-applet &
 
-# solaar
-solaar -w hide &
-
 # trayer
 #sleep 2 && trayer --edge top --align right --margin 400 --monitor 0 --widthtype request --heighttype pixel --height 30 --distancefrom top --distance 3 --iconspacing 10 &
-
-# thunar daemon
-systemctl --user start thunar

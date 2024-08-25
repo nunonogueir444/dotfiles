@@ -16,7 +16,7 @@ import os, subprocess
 mod = "mod4"
 alt = "mod1"
 
-terminal = "alacritty"
+terminal = "kitty"
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -82,7 +82,7 @@ keys = [
     # dmenu
     Key([mod], "d", lazy.run_extension(extension.DmenuRun(
         dmenu_prompt=">",
-        dmenu_font="FiraCode Nerd Font-14",
+        dmenu_font="FiraCode Nerd Font-12",
         background="#15181a",
         foreground="#00ff00",
         selected_background="#079822",
@@ -95,7 +95,7 @@ keys = [
     Key([mod, "control"], "home", lazy.spawn("systemctl poweroff")),
 
     # rofi
-    Key([mod], "p", lazy.spawn("rofi -modi drun -show drun -show-icons -dpi 192")),
+    Key([mod], "Tab", lazy.spawn("rofi -modi drun -show drun -show-icons -dpi 192")),
 
     # brightness
     Key([mod, "control"], "1", lazy.spawn("brightness 10")),
@@ -145,13 +145,13 @@ for vt in range(1, 8):
 groups = [
     Group(name="1", label=" 󰍹 "),
     Group(name="2", label=" 󰍹 "),
-    Group(name="3", label="  ", spawn="google-chrome-stable"   ,matches=[Match(wm_instance_class="google-chrome")]),
-    Group(name="4", label=" 󰨞 ", spawn="code"                   , matches=[Match(wm_instance_class="code")]),
-    Group(name="5", label="  ", spawn="thunar"                 , matches=[Match(wm_instance_class="thunar")]),
-    Group(name="6", label="  ", spawn="alacritty"             ),# matches=[Match(wm_instance_class="kitty")]),
-    Group(name="7", label="  ", spawn="github-desktop"         , matches=[Match(wm_instance_class="github-desktop")]),
-    Group(name="8", label="  ", spawn="vmware"                 , matches=[Match(wm_instance_class="vmware")]),
-    Group(name="9", label="  ", spawn=""  ),# matches=[Match(wm_instance_class="google-chrome")]),
+    Group(name="3", label=" 󰍹 "),
+    Group(name="4", label=" 󰍹 "),
+    Group(name="5", label="  ", spawn="google-chrome-stable"   , matches=[Match(wm_instance_class="google-chrome")]),
+    Group(name="6", label=" 󰨞 ", spawn="code"                   , matches=[Match(wm_instance_class="code")]),
+    Group(name="7", label="  ", spawn="nemo"                   , matches=[Match(wm_instance_class="nemo")]),
+    Group(name="8", label="  ", spawn="kitty"                  , matches=[Match(wm_instance_class="alacritty")]),
+    Group(name="9", label="  ", spawn="vmware"                 , matches=[Match(wm_instance_class="vmware")]),
     Group(name="0", label=" 󰝚 ", spawn="youtube-music"          , matches=[Match(wm_instance_class="youtube-music")]),
 ]
 
@@ -194,12 +194,12 @@ layouts = [
     #layout.MonadWide(),
     layout.Plasma(
         border_focus='#FF0000',
-        border_focus_fixed='#FF0000',
+        border_focus_fixed='#00e8dc',
         border_normal='#333333',
         border_normal_fixed='#333333',
         border_width=2,
-        border_width_single=2,
-        #fair=False,
+        border_width_single=0,
+        fair=False,
         margin=10,
         name='gore'
         ),
@@ -225,34 +225,33 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Memory(format='😭{MemPercent:3.0f}% 󰣁{SwapPercent:3.0f}%'),
-                widget.Sep(padding=20),
-                widget.CPU(format='😈{freq_current:4.1f}GHz{load_percent:5.1f}%'),
-                widget.Sep(padding=20),
-                widget.Prompt(),
-                widget.WindowName(
-                    scroll=True,
-                    scroll_fixed_width=True,
-                    scroll_step=3,
-                    scroll_delay=1,
-                    width=1110,
-                    for_current_screen=True,
-                ),
-                widget.Sep(padding=20),
-                #widget.Spacer(length=bar.STRETCH),
+                widget.CurrentLayout(),
                 widget.GroupBox(
                     active='FF0000',
+                    #spacing=10,
                     inactive='AAAAAA',
                     screen_border='#00FF00',
                     this_screen_border='AA0000',
                     this_current_screen_border='FF0000',
                     other_screen_border='005500',
                     other_current_screen_border='005500',
-                    padding_x = 10,
-                    padding_y = 3,
                     ),
-                widget.CurrentLayout(),
-                widget.Spacer(length = bar.STRETCH),
+                widget.Sep(padding=20),
+                widget.LaunchBar(
+                    icon_size=22,
+                    padding=10,
+                    progs=[
+                    ('/home/nunonogueir444/.config/qtile/icons/easyeffects.png', 'easyeffects', 'easyeffects'),
+                    ('lutris', 'lutris', 'lutris'),
+                    ('heroic', 'heroic', 'heroic'),
+                    ('steam', 'steam-runtime', 'steam'),
+                    ('github-desktop', 'github-desktop', 'github-desktop'),
+                    ('firefox', 'firefox', 'firefox'),
+                    ]
+                    ),
+                widget.Sep(padding=20),
+                widget.Prompt(),
+                widget.WindowName(),
                 widget.Sep(padding=20),
                 widget.Mpris2(
                     foreground='ff0000',
@@ -260,25 +259,31 @@ screens = [
                     scroll=True,
                     scroll_fixed_width=True,
                     scroll_step=3,
-                    scroll_delay=1,
-                    width=600,
+                    width=400,
                     poll_interval=1,
                 ),
                 widget.Sep(padding=20),
+                widget.Net(
+                    format='{down:6.2f}{down_suffix:<2} ↓↑ {up:6.2f}{up_suffix:<2}'),
+                widget.Sep(padding=20),
+                widget.CPU(),
+                #widget.Sep(padding=20),
+                #widget.Clipboard(),
+                widget.Sep(padding=20),
                 widget.OpenWeather(
                     location='Clones',
-                    format='{location_city} {icon} {temp}°{units_temperature}'
-                ),
-                widget.Sep(padding=20),
-                widget.Systray(icon_size=24, padding=10),
-                widget.Sep(padding=20),
-                #widget.Volume(emoji = True, emoji_list = ['🔇', '🔈', '🔉', '🔊']),
-                #widget.Volume(),
+                    format='{location_city} {icon} {main_temp}°{units_temperature}'
+                    ),
                 #widget.Sep(padding=20),
+                #widget.StatusNotifier(icon_size=22),
+                widget.Sep(padding=20),
+                widget.Systray(icon_size=22, padding=10),
+                widget.Sep(padding=20),
                 widget.Clock(format="%a %d-%m-%Y %H:%M:%S"),
+                #widget.QuickExit(default_text='[X]', countdown_format='[{}]')
             ],
             36,
-            background="#333333",
+            background="#222222",
             border_width=0,
             border_color="#ff0000",
             opacity=1,

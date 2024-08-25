@@ -16,7 +16,7 @@ import os, subprocess
 mod = "mod4"
 alt = "mod1"
 
-terminal = "alacritty"
+terminal = "kitty"
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -82,7 +82,7 @@ keys = [
     # dmenu
     Key([mod], "d", lazy.run_extension(extension.DmenuRun(
         dmenu_prompt=">",
-        dmenu_font="FiraCode Nerd Font-14",
+        dmenu_font="FiraCode Nerd Font-12",
         background="#15181a",
         foreground="#00ff00",
         selected_background="#079822",
@@ -95,7 +95,7 @@ keys = [
     Key([mod, "control"], "home", lazy.spawn("systemctl poweroff")),
 
     # rofi
-    Key([mod], "p", lazy.spawn("rofi -modi drun -show drun -show-icons -dpi 192")),
+    Key([mod], "Tab", lazy.spawn("rofi -modi drun -show drun -show-icons -dpi 192")),
 
     # brightness
     Key([mod, "control"], "1", lazy.spawn("brightness 10")),
@@ -145,13 +145,13 @@ for vt in range(1, 8):
 groups = [
     Group(name="1", label=" 󰍹 "),
     Group(name="2", label=" 󰍹 "),
-    Group(name="3", label="  ", spawn="google-chrome-stable"   ,matches=[Match(wm_instance_class="google-chrome")]),
-    Group(name="4", label=" 󰨞 ", spawn="code"                   , matches=[Match(wm_instance_class="code")]),
-    Group(name="5", label="  ", spawn="thunar"                 , matches=[Match(wm_instance_class="thunar")]),
-    Group(name="6", label="  ", spawn="alacritty"             ),# matches=[Match(wm_instance_class="kitty")]),
-    Group(name="7", label="  ", spawn="github-desktop"         , matches=[Match(wm_instance_class="github-desktop")]),
-    Group(name="8", label="  ", spawn="vmware"                 , matches=[Match(wm_instance_class="vmware")]),
-    Group(name="9", label="  ", spawn=""  ),# matches=[Match(wm_instance_class="google-chrome")]),
+    Group(name="3", label=" 󰍹 "),
+    Group(name="4", label="  ", spawn="google-chrome-stable"   , matches=[Match(wm_instance_class="google-chrome")]),
+    Group(name="5", label=" 󰨞 ", spawn="code"                   , matches=[Match(wm_instance_class="code")]),
+    Group(name="6", label="  ", spawn="nemo"                   , matches=[Match(wm_instance_class="nemo")]),
+    Group(name="7", label="  ", spawn="kitty"                  ),# matches=[Match(wm_instance_class="kitty")]),
+    Group(name="8", label="  ", spawn="github-desktop"         , matches=[Match(wm_instance_class="github-desktop")]),
+    Group(name="9", label="  ", spawn="vmware"                 , matches=[Match(wm_instance_class="vmware")]),
     Group(name="0", label=" 󰝚 ", spawn="youtube-music"          , matches=[Match(wm_instance_class="youtube-music")]),
 ]
 
@@ -194,12 +194,12 @@ layouts = [
     #layout.MonadWide(),
     layout.Plasma(
         border_focus='#FF0000',
-        border_focus_fixed='#FF0000',
+        border_focus_fixed='#00e8dc',
         border_normal='#333333',
         border_normal_fixed='#333333',
         border_width=2,
-        border_width_single=2,
-        #fair=False,
+        border_width_single=0,
+        fair=False,
         margin=10,
         name='gore'
         ),
@@ -225,21 +225,9 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Memory(format='😭{MemPercent:3.0f}% 󰣁{SwapPercent:3.0f}%'),
-                widget.Sep(padding=20),
-                widget.CPU(format='😈{freq_current:4.1f}GHz{load_percent:5.1f}%'),
-                widget.Sep(padding=20),
+                widget.WindowName(),
+                widget.Spacer(length=bar.STRETCH),
                 widget.Prompt(),
-                widget.WindowName(
-                    scroll=True,
-                    scroll_fixed_width=True,
-                    scroll_step=3,
-                    scroll_delay=1,
-                    width=1110,
-                    for_current_screen=True,
-                ),
-                widget.Sep(padding=20),
-                #widget.Spacer(length=bar.STRETCH),
                 widget.GroupBox(
                     active='FF0000',
                     inactive='AAAAAA',
@@ -260,7 +248,6 @@ screens = [
                     scroll=True,
                     scroll_fixed_width=True,
                     scroll_step=3,
-                    scroll_delay=1,
                     width=600,
                     poll_interval=1,
                 ),
