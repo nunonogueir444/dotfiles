@@ -1,0 +1,88 @@
+
+// Inspired by Catnap
+{
+  "logo": {
+      "type": "small",
+      "padding": {
+          "top": 4,
+          "right": 1,
+          "left": 1
+      }
+  },
+  "display": {
+      "separator": " "
+  },
+  "modules": [
+      {
+          "key": "╭────────────╮",
+          "type": "custom"
+      },
+      {
+          "key": "│ {#31} user     {#keys}│",
+          "type": "title"
+      },
+      {
+          "key": "│ {#32}{icon} distro   {#keys}│",
+          "type": "os"
+      },
+      {
+          "key": "│ {#33} kernel   {#keys}│",
+          "type": "kernel"
+      },
+      {
+          "key": "│ {#34} packages {#keys}│",
+          "type": "packages"
+      },
+      {
+          "key": "│ {#35}󰇄 desktop  {#keys}│",
+          "type": "de"
+      },
+      {
+          "key": "│ {#36} wm       {#keys}│",
+          "type": "wm"
+      },
+      {
+          "key": "│ {#37} term     {#keys}│",
+          "type": "terminal"
+      },
+      {
+          "key": "│ {#31} shell    {#keys}│",
+          "type": "shell"
+      },
+      {
+          "key": "│ {#32}󱀫 editor   {#keys}│",
+          "type": "editor"
+      },
+      {
+          "key": "│ {#33} board    {#keys}│",
+          "type": "board",
+          "format": "{1}"
+      },
+      {
+          "key": "│ {#34}󰻠 cpu      {#keys}│",
+          "type": "cpu",
+          "showPeCoreCount": true,
+          //"format": "{1}@{7}GHz"
+      },
+      {
+        "key": "│ {#35}󰺵 gpu      {#keys}│",
+        "type":"gpu",
+        "format":"{2}"
+      },
+      {
+          "key": "│ {#36} memory   {#keys}│",
+          "type": "memory",
+          "format": "{1}/{2}"
+      },
+      {
+          "key": "│ {#39} colors   {#keys}│",
+          "type": "colors",
+          "symbol": "block",
+          "block": {"range": [0,7]}
+      },
+      {
+          "key": "╰────────────╯",
+          "type": "custom"
+      }
+  ]
+}

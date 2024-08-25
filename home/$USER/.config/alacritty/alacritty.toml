@@ -1,94 +1,44 @@
-#import = ["/home/drew/.config/alacritty/catppuccin/catppuccin-mocha.toml"]
 live_config_reload = true
-window.opacity = 0.9
 
-[[colors.indexed_colors]]
-color = "#FAB387"
-index = 16
+# alacritty-themes
+import = [
+  "/usr/lib/node_modules/alacritty-themes/themes/3024.dark.toml"
+]
 
-[[colors.indexed_colors]]
-color = "#F5E0DC"
-index = 17
+[window]
+opacity = 0.9
 
-[colors.bright]
-black = "#585B70"
-blue = "#89B4FA"
-cyan = "#94E2D5"
-green = "#A6E3A1"
-magenta = "#F5C2E7"
-red = "#F38BA8"
-white = "#A6ADC8"
-yellow = "#F9E2AF"
-
-[colors.cursor]
-cursor = "#F5E0DC"
-text = "#1E1E2E"
-
-[colors.dim]
-black = "#45475A"
-blue = "#89B4FA"
-cyan = "#94E2D5"
-green = "#A6E3A1"
-magenta = "#F5C2E7"
-red = "#F38BA8"
-white = "#BAC2DE"
-yellow = "#F9E2AF"
-
-[colors.hints.end]
-background = "#A6ADC8"
-foreground = "#1E1E2E"
-
-[colors.hints.start]
-background = "#F9E2AF"
-foreground = "#1E1E2E"
-
-[colors.normal]
-black = "#45475A"
-blue = "#89B4FA"
-cyan = "#94E2D5"
-green = "#A6E3A1"
-magenta = "#F5C2E7"
-red = "#F38BA8"
-white = "#BAC2DE"
-yellow = "#F9E2AF"
-
-[colors.primary]
-background = "#1E1E2E"
-bright_foreground = "#CDD6F4"
-dim_foreground = "#CDD6F4"
-foreground = "#CDD6F4"
-
-[colors.search.focused_match]
-background = "#A6E3A1"
-foreground = "#1E1E2E"
-
-[colors.search.matches]
-background = "#A6ADC8"
-foreground = "#1E1E2E"
-
-[colors.selection]
-background = "#F5E0DC"
-text = "#1E1E2E"
-
-[colors.vi_mode_cursor]
-cursor = "#B4BEFE"
-text = "#1E1E2E"
+  [window.padding]
+  x = 10
+  y = 10
 
 [font]
-size = 12
+size = 10
 
-[font.normal]
-family = "FiraCode Nerd Font"
-style = "Regular"
+    [font.bold]
+    family = "FiraCode Nerd Font"
+    style = "Bold"
 
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "Return"
-mods = "Control|Shift"
+    [font.bold_italic]
+    family = "FiraCode Nerd Font"
+    style = "Bold Italic"
 
-#[shell]
-#program = "/usr/bin/fish"
+    [font.italic]
+    family = "FiraCode Nerd Font"
+    style = "Italic"
 
-[window.padding]
-x = 20
-y = 20
+    [font.normal]
+    family = "FiraCode Nerd Font"
+    style = "Regular"
+
+# Spawn new instance in same directory
+[keyboard]
+bindings = [
+   { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
+]
+
+# hints text or hyperlinks
+[[hints.enabled]]
+regex = "[^ ]+\\.rs:\\d+:\\d+"
+command = { program = "code", args = [ "--goto" ] }
+mouse = { enabled = true }
