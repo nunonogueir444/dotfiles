@@ -33,6 +33,7 @@ complete -cf sudo
 
 # Syntax highlighting and autosuggestions
 source /usr/share/blesh/ble.sh
+#[[ $- == *i* ]] && source /usr/share/blesh/ble.sh
 
 #"command not found" hook that will automatically search the official repositories
 source /usr/share/doc/pkgfile/command-not-found.bash
